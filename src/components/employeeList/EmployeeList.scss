@@ -1,0 +1,39 @@
+.employee_table{
+    font-family: sans-serif;
+    width: 100%;
+}
+
+.table_record{
+    padding-top: 12px;
+    padding-bottom: 5px;
+    height: 20px;
+}
+
+th{
+    height: 70px;
+    border-bottom: 1px solid #ddd;
+}
+
+td{
+    height: 50px;
+    border-bottom: 1px solid #ddd;
+}
+
+.table_record:hover{
+    background-color: #F5F7F8;
+}
+
+.table_title{
+    font-size: 30px;
+}
+
+.create_button{
+    width: 250px;
+    height: 50px;
+    background: #141b2d;
+    color: white;
+}
+
+.create_button:hover{
+    background: #242f4a;
+}

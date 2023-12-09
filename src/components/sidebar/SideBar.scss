@@ -1,0 +1,34 @@
+
+.logo{
+    width: 40px;
+    height: 40px;
+}
+
+.home_logo{
+    width: 300px;
+    height: 60px;
+    align-items: center;
+}
+
+
+.sidebar{
+    background-color:#141b2d;
+    color: white;
+    height: 1500px;
+    width: 80%;
+}
+
+.navitem{
+    height: 60px;
+    padding-left: 14px;
+    margin-top: 12px;
+}
+
+.navitem:hover{
+    cursor: pointer;
+    background-color: #2b3142;
+}
+
+.left_sidebar{
+    height: 1200px;
+}
