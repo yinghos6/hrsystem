@@ -1,22 +1,25 @@
 .employee_table{
     font-family: sans-serif;
     width: 100%;
+    
 }
 
 .table_record{
     padding-top: 12px;
     padding-bottom: 5px;
-    height: 20px;
+    height: 24px;
 }
 
 th{
     height: 70px;
     border-bottom: 1px solid #ddd;
+    background-color: #F5F5F5;
 }
 
 td{
-    height: 50px;
+    height: 55px;
     border-bottom: 1px solid #ddd;
+    
 }
 
 .table_record:hover{
@@ -37,3 +40,44 @@ td{
 .create_button:hover{
     background: #242f4a;
 }
+
+.green_dot {
+    animation: blinker 2s linear infinite;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: 1px solid grey;
+    background-color: green;
+    border-radius: 100%;
+    cursor: pointer;
+  }
+  @keyframes blinker {
+    50% {
+      opacity: 0.6;
+    }
+  }
+  
+  .red_dot {
+    animation: blinker 2s linear infinite;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: 1px solid grey;
+    background-color: red;
+    border-radius: 100%;
+  }
+  @keyframes blinker {
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  .green_text td{
+    color: #161A30;
+
+  }
+  
+  .red_text{
+        color: #B6BBC4;
+  }
+  

@@ -80,7 +80,8 @@ function Register() {
                                 {status?
                                         <div>
                                             <div className=' flex justify-center mt-12'>
-                                                <span>The user is created successfully!</span>
+
+                                                <span className='ml-5'>The user is created successfully!</span>
                                             </div>
                                             <div  className='flex justify-center mt-12'>
                                                 <button className='bg-sky-700 h-12 w-96 cursor-pointer hover:bg-sky-800 rounded-md' onClick={redirectToLogin} >

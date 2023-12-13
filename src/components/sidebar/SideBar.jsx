@@ -21,6 +21,8 @@ function SideBar() {
 
     const navigation = useNavigate();
 
+    const RedirectToCreateNewUser = () => navigation("/list")
+
     const logout = () => {
         localStorage.removeItem("user");
         navigation('/login');
@@ -54,9 +56,9 @@ function SideBar() {
                      <MdOutlineDashboard color='white' size={30} className="nav_icon" />
                     <li className='tracking-wider'>Dashboard</li>
                 </div>
-                <div className='navitem flex flex-row items-center gap-8 '>
+                <div className='navitem flex flex-row items-center gap-8 ' onClick={()=>RedirectToCreateNewUser()}>
                     <IoPeople color='white' size={30} />
-                    <li className='tracking-wider' >Employee List</li>
+                    <li className='tracking-wider'  >Employee List</li>
                 </div>
                 <div className='navitem flex flex-row items-center gap-8' >
                     <SiAwsorganizations color='white' size={30}  />

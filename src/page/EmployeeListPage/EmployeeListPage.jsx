@@ -17,7 +17,7 @@ function EmployeeListPage() {
         </div>
         <div className='basis-4/5 flex flex-col'>
             <TopBar />
-            <div className='mt-24 mx-24' >
+            <div className='mt-12 mx-24' >
                  <EmployeeList />
             </div>
         </div>
