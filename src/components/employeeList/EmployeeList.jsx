@@ -5,10 +5,16 @@ import { Link, useNavigate } from "react-router-dom";
 import EmployeeService from '../../service/EmployeeService';
 import { TbArrowsSort } from "react-icons/tb";
 import { IoSearchSharp } from "react-icons/io5";
-import ReactPaginate from "react-paginate";
-import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
-import { IconContext } from "react-icons";
+import Pagination from '@material-ui/lab/Pagination';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        marginTop: theme.spacing(1),
+      },
+    },
+  }));
 
 
 function EmployeeList() {
@@ -16,8 +22,11 @@ function EmployeeList() {
     const [employeeList, setemployeeList] = useState([]);
     const [totalNum, settotalNum] = useState("");
     const [totalPage, settotalPage] = useState("");
-    const [currentPage, setcurrentPage] = useState(0);
+    const [currentPage, setcurrentPage] = useState("0");
     const [currentSize, setcurrentSize] = useState(20);
+    const [sortField, setsortField] = useState("id");
+    const [sortDir, setsortDir] = useState("asc");
+    const classes = useStyles();
 
 
 
@@ -25,17 +34,26 @@ function EmployeeList() {
 
     const RedirectToCreateNewUser = () => navigation("/createNewEmployee")
 
+    const handlePageChange = (event,page)=>{
+        let seletedPage = page -1;
+        console.log("the page is"+ seletedPage);
+        setcurrentPage(seletedPage);
+        EmployeeService.getAllEmployee(seletedPage ,currentSize,sortField,sortDir ).then((res)=>{
+            setemployeeList(res.data.content);
+            settotalNum(res.data.totalElements);
+            settotalPage(res.data.totalPages);
+            console.log(res.data);
 
-    const refreshList = (event) =>{
-        setcurrentPage(event.selected);
-        console.log("current page is" + event.selected);
-        getEmployeeFullList();
+        }).catch(error => {
+            console.log(error);
+        });
+
     }
 
    
       
       const getEmployeeFullList = () =>{
-        EmployeeService.getAllEmployee(currentPage,currentSize).then((res)=>{
+        EmployeeService.getAllEmployee(currentPage,currentSize,sortField,sortDir ).then((res)=>{
             setemployeeList(res.data.content);
             settotalNum(res.data.totalElements);
             settotalPage(res.data.totalPages);
@@ -60,7 +78,7 @@ function EmployeeList() {
         <div className='flex flex-row justify-between items-center '>
             <div className='flex flex-row gap-4 items-center'>
                 <span>Keyword Filter:</span>
-                <input className='h-8 w-64 px-4 border border-gray-700 rounded-lg'  />
+                <input className='h-8 w-64 px-4 border border-gray-700 hover:border-sky-800 rounded-lg'  />
                 <button className=' bg-sky-600 h-8 w-8 rounded-2xl hover:bg-sky-400  '>
                     <IoSearchSharp color='white' className='mx-2'/>
                 </button>
@@ -200,22 +218,12 @@ function EmployeeList() {
             </tbody>
         </table>
         <div className='flex flex-row justify-center mt-8 '>
-             <span className='flex font-openSans '>The total of employee: <p className='text-sky-800 ml-4'>{totalNum}</p></span>
+             <span className='flex font-openSans '>The total of employee: <p className='text-sky-800 ml-4 underline'>{totalNum}</p></span>
         </div>
-        <div className='flex flex-row justify-center mt-4 item-center'>
-        <ReactPaginate className='flex gap-4'
-        containerClassName='pagination'
-        pageCount={totalPage}
-        onPageChange={refreshList}
-        breakLabel="..."
-        pageRangeDisplayed={5}
-        previousLabel={
-            <AiFillLeftCircle size={25} className="mr-2" />
-        }
-        nextLabel={
-            <AiFillRightCircle size={25} className="ml-2" />
-        }
-        />
+        <div className='flex flex-row justify-center mt-4 item-center mb-12 '>
+                <div className={classes.root}>
+                    <Pagination count={totalPage} variant="outlined" size="large" onChange={handlePageChange}  />
+                </div>
         </div>
         
     </div>

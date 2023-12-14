@@ -7,8 +7,8 @@ const EmployeeService_API_BASE_URL = "http://localhost:8080/api/v1/employee/"
 class EmployeeService{
 
 
-    getAllEmployee(page, size){
-        return axios.get(EmployeeService_API_BASE_URL+'getAllEmployee' + '?page='+page +'&size='+size, {headers:authHeader()});
+    getAllEmployee(page, size,sortField, sortDir){
+        return axios.get(EmployeeService_API_BASE_URL+'getAllEmployee' + '?page='+page +'&size='+size +"&sortField="+sortField +"&sortDir="+sortDir, {headers:authHeader()});
     }
 
     getEmployeeById(employeeId){
