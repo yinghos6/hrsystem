@@ -26,6 +26,7 @@ function EmployeeList() {
     const [currentSize, setcurrentSize] = useState(20);
     const [sortField, setsortField] = useState("id");
     const [sortDir, setsortDir] = useState("asc");
+    const [keyword, setkeyword] = useState("");
     const classes = useStyles();
 
 
@@ -34,11 +35,27 @@ function EmployeeList() {
 
     const RedirectToCreateNewUser = () => navigation("/createNewEmployee")
 
+    // const handlePageChange = (event,page)=>{
+    //     let seletedPage = page -1;
+    //     console.log("the page is"+ seletedPage);
+    //     setcurrentPage(seletedPage);
+    //     EmployeeService.getAllEmployee(seletedPage ,currentSize,sortField,sortDir ).then((res)=>{
+    //         setemployeeList(res.data.content);
+    //         settotalNum(res.data.totalElements);
+    //         settotalPage(res.data.totalPages);
+    //         console.log(res.data);
+
+    //     }).catch(error => {
+    //         console.log(error);
+    //     });
+
+    // }
+
     const handlePageChange = (event,page)=>{
         let seletedPage = page -1;
         console.log("the page is"+ seletedPage);
         setcurrentPage(seletedPage);
-        EmployeeService.getAllEmployee(seletedPage ,currentSize,sortField,sortDir ).then((res)=>{
+        EmployeeService.getAllEmployeeByKeyword(seletedPage ,currentSize,sortField,sortDir,keyword ).then((res)=>{
             setemployeeList(res.data.content);
             settotalNum(res.data.totalElements);
             settotalPage(res.data.totalPages);
@@ -50,23 +67,35 @@ function EmployeeList() {
 
     }
 
-   
-      
-      const getEmployeeFullList = () =>{
-        EmployeeService.getAllEmployee(currentPage,currentSize,sortField,sortDir ).then((res)=>{
+    
+    const getEmployeeFullListByKeyword = () => {
+        EmployeeService.getAllEmployeeByKeyword(currentPage, currentSize, sortField, sortDir, keyword).then((res)=>{
             setemployeeList(res.data.content);
             settotalNum(res.data.totalElements);
             settotalPage(res.data.totalPages);
             console.log(res.data);
-
-        }).catch(error => {
+        }).catch(error =>{
             console.log(error);
         });
-      }
+
+    }
+
+      
+    //   const getEmployeeFullList = () =>{
+    //     EmployeeService.getAllEmployee(currentPage,currentSize,sortField,sortDir ).then((res)=>{
+    //         setemployeeList(res.data.content);
+    //         settotalNum(res.data.totalElements);
+    //         settotalPage(res.data.totalPages);
+    //         console.log(res.data);
+
+    //     }).catch(error => {
+    //         console.log(error);
+    //     });
+    //   }
 
 
     useEffect(() => {
-        getEmployeeFullList();
+        getEmployeeFullListByKeyword();
         
     }, [])
 
@@ -78,8 +107,8 @@ function EmployeeList() {
         <div className='flex flex-row justify-between items-center '>
             <div className='flex flex-row gap-4 items-center'>
                 <span>Keyword Filter:</span>
-                <input className='h-8 w-64 px-4 border border-gray-700 hover:border-sky-800 rounded-lg'  />
-                <button className=' bg-sky-600 h-8 w-8 rounded-2xl hover:bg-sky-400  '>
+                <input className='h-8 w-96 px-4 border border-gray-700 hover:border-sky-800 rounded-lg' onChange={(e)=>setkeyword(e.target.value)} placeholder="Find by English Surtname or English Given Name..." />
+                <button className=' bg-sky-600 h-8 w-8 rounded-2xl hover:bg-sky-400' onClick={()=>getEmployeeFullListByKeyword()}>
                     <IoSearchSharp color='white' className='mx-2'/>
                 </button>
             </div>
@@ -95,55 +124,47 @@ function EmployeeList() {
             <thead>
                 <tr>
                      <th className='border border-slate-500'>
-                        <div className='flex flex-row justify-center hover:cursor-pointer gap-4' >
+                        <div className='flex flex-row justify-center hover:cursor-pointer ' >
                             <span>Active Status</span>
-                            <TbArrowsSort />
                         </div>                    
                     </th>
                     <th className='border border-slate-500'>
-                        <div className='flex flex-row justify-center hover:cursor-pointer gap-4' >
+                        <div className='flex flex-row justify-center hover:cursor-pointer ' >
                             <span>Staff Number</span>
-                            <TbArrowsSort />
                         </div>                    
                     </th>
                     <th className='border border-slate-500'>
-                        <div className='flex flex-row justify-center hover:cursor-pointer gap-4' >
+                        <div className='flex flex-row justify-center hover:cursor-pointer ' >
                             <span>Chinese FullName</span>
-                            <TbArrowsSort />
                         </div>                    
                      </th>
                      <th className='border border-slate-500'>
-                        <div className='flex flex-row justify-center hover:cursor-pointer gap-4' >
+                        <div className='flex flex-row justify-center hover:cursor-pointer ' >
                             <span>English Surname</span>
-                            <TbArrowsSort />
                         </div>                    
                     </th>
                     <th className='border border-slate-500'>
-                        <div className='flex flex-row justify-center hover:cursor-pointer gap-4' >
+                        <div className='flex flex-row justify-center hover:cursor-pointer ' >
                             <span>English GivenName</span>
-                            <TbArrowsSort />
                         </div>                    
                     </th>
                     <th className='border border-slate-500'>
-                        <div className='flex flex-row justify-center hover:cursor-pointer gap-4' >
+                        <div className='flex flex-row justify-center hover:cursor-pointer ' >
                             <span>Department</span>
-                            <TbArrowsSort />
                         </div>                    
                     </th>
                     <th className='border border-slate-500'>
-                        <div className='flex flex-row justify-center hover:cursor-pointer gap-4' >
+                        <div className='flex flex-row justify-center hover:cursor-pointer ' >
                             <span>Position</span>
-                            <TbArrowsSort />
                         </div>                    
                      </th>
                      <th className='border border-slate-500'>
-                        <div className='flex flex-row justify-center hover:cursor-pointer gap-4' >
+                        <div className='flex flex-row justify-center hover:cursor-pointer ' >
                             <span>Shop</span>
-                            <TbArrowsSort />
                         </div>                    
                      </th>
                      <th className='border border-slate-500'>
-                        <div className='flex flex-row justify-center hover:cursor-pointer gap-4' >
+                        <div className='flex flex-row justify-center hover:cursor-pointer ' >
                             <span>Profile</span>
                         </div>                    
                     </th>

@@ -98,11 +98,11 @@ function Register() {
                                             </div>
                                             {usernameValid?(
                                                 <div className='flex justify-center text-gray-400 text-sm mt-2'>
-                                                    <span>- Username must contain at least 6 characters</span>
+                                                    <span>- Username must contain at least 4 characters</span>
                                                 </div>
                                             ):(
                                                 <div className='flex justify-center text-red-600 text-sm mt-2'>
-                                                     <span>- Username must contain at least 6 characters</span>
+                                                     <span>- Username must contain at least 4 characters</span>
                                                 </div>
                                             )}
                                             
@@ -111,17 +111,17 @@ function Register() {
                                             </div>
                                             {passwordValid?(
                                                 <div className='flex justify-center text-gray-400 text-sm mt-2'>
-                                                     <span>- Password must contain at least 6 characters</span>
+                                                     <span>- Password must contain at least 4 characters</span>
                                                 </div>
                                             ):(
                                                 <div className='flex justify-center text-red-600 text-sm mt-2'>
-                                                     <span>- Password must contain at least 6 characters</span>
+                                                     <span>- Password must contain at least 4 characters</span>
                                                 </div>
                                             )}
                                            
 
                                             <div className='flex justify-center mt-8 h-12'>
-                                            <input alt='email' type='text' className='focus:border-sky-600  outline-none border-collapse border-b-4 p-3 w-96' placeholder='Enter Your Email'  onChange={(e)=>{setemail(e.target.value)}} />
+                                            <input alt='email' type='text' className='focus:border-sky-600  outline-none border-collapse border-b-4 p-3 w-96 required' placeholder='Enter Your Email'  onChange={(e)=>{setemail(e.target.value)}} />
                                             </div>
                             
                                             

@@ -11,6 +11,10 @@ class EmployeeService{
         return axios.get(EmployeeService_API_BASE_URL+'getAllEmployee' + '?page='+page +'&size='+size +"&sortField="+sortField +"&sortDir="+sortDir, {headers:authHeader()});
     }
 
+    getAllEmployeeByKeyword(page, size,sortField, sortDir, keyword){
+        return axios.get(EmployeeService_API_BASE_URL+'getAllEmployee' + '?page='+page +'&size='+size +"&sortField="+sortField +"&sortDir="+sortDir + "&keyword=" +keyword, {headers:authHeader()});
+    }
+
     getEmployeeById(employeeId){
         return axios.get(EmployeeService_API_BASE_URL + employeeId, {headers:authHeader()});
     }
