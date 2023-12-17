@@ -6,6 +6,7 @@ import UserService from '../../service/UserService';
 
 
 
+
 function Register() {
 
 
@@ -16,9 +17,12 @@ function Register() {
     const [status, setstatus] = useState(false);
     const [usernameValid, setusernameValid] = useState(false);
     const [passwordValid, setpasswordValid] = useState(false);
+    const [buttonEnabled, setbuttonEnabled] = useState(false);
 
 
     const navigation = useNavigate();
+
+   
 
      
     const registerNewUser = (e)=> {
@@ -42,9 +46,7 @@ function Register() {
 
     useEffect(() => {
         console.log(status);
-        if(username.length > 5){
-            setusernameValid = true
-        }
+        
 
     }, [status])
 
@@ -94,7 +96,7 @@ function Register() {
                                         :
                                         <form>
                                             <div className='flex justify-center h-12'>
-                                                <input alt='username' type='text' className='focus:border-sky-600 outline-none outline-1 border-collapse border-b-4 p-3 w-96' placeholder='Enter Username' onChange={(e)=>{setusername(e.target.value)}} />
+                                                <input alt='username' type='text' className='focus:border-sky-600 outline-none outline-1 border-collapse border-b-4 p-3 w-96 required' placeholder='Enter Username' onChange={(e)=>{setusername(e.target.value)}} />
                                             </div>
                                             {usernameValid?(
                                                 <div className='flex justify-center text-gray-400 text-sm mt-2'>
@@ -107,7 +109,7 @@ function Register() {
                                             )}
                                             
                                             <div className='flex justify-center mt-8 h-12'>
-                                                <input alt='password' type='password' className='focus:border-sky-600  outline-none border-collapse border-b-4 p-3 w-96' placeholder='Enter Password' onChange={(e)=>{setpassword(e.target.value)}} />
+                                                <input alt='password' type='password' className='focus:border-sky-600  outline-none border-collapse border-b-4 p-3 w-96 required' placeholder='Enter Password' onChange={(e)=>{setpassword(e.target.value)}} />
                                             </div>
                                             {passwordValid?(
                                                 <div className='flex justify-center text-gray-400 text-sm mt-2'>
