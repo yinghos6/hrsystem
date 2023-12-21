@@ -2,7 +2,7 @@
 
 | Conponents  | Technology  |
 |---|---|
-| Fronted  | React Hook + Tailwind + Sass  |
+| Fronted  | React Hook + Tailwind UI + Sass  |
 | Backend  | Spring Boot 3.0+ , Java 17 |
 | Security  |  Spring Security, JWT |
 | Database  |  JPA-Hibernate, MySQL |

@@ -4,12 +4,17 @@ import EmployeeService from '../../service/EmployeeService';
 import { Button, Result } from 'antd';
 import './EmployeeDetail.scss';
 import {UserDeleteOutlined} from '@ant-design/icons';
-
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { Link } from "react-router-dom";
 
 
 
 function EmployeeDetail() {
     const{id} = useParams();
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
 
     const [status, setstatus] = useState(false);
     const [employeeInfo, setemployeeInfo] = useState([]);
@@ -21,11 +26,21 @@ function EmployeeDetail() {
     const [deleteStatus, setdeleteStatus] = useState("");
     const [deleteMessage, setdeleteMessage] = useState("");
 
+  
+
 
     const navigation = useNavigate();
 
     const RedirectToCreateNewUser = () => navigation("/list")
+    const RedirectToEditUser = () => navigation("/employee/profile/edit/:id")
 
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+      };
+      const handleClose = () => {
+        setAnchorEl(null);
+      };
     
 
     const deleteEmployeeByID = (e) => {
@@ -128,16 +143,45 @@ function EmployeeDetail() {
                     <span className=' font-kdam basis-1/2'>Employment Starting Date:</span>
                     <span className='basis-1/2'>{employeeDate.substring(0,10)}</span>
                 </div>
-                <div className='flex flex-row h-12 items-center mt-24 justify-center'>
+                    { /* <div className='flex flex-row h-12 items-center mt-24 justify-center'>
                     <button className='delete_button rounded-xl' onClick={deleteEmployeeByID}>
                         <span>Delete</span>
                     </button>
-                </div>
-            </div>
-        </div>
+                    </div> */}
+                    <div className='flex flex-row h-12 items-center mt-24 justify-center'>
+                                <Button
+                                id="basic-button"
+                                aria-controls={open ? 'basic-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={open ? 'true' : undefined}
+                                onClick={handleClick}
+                                className="w-72 h-10"
+                            >
+                                Action
+                            </Button>
+                            <Menu
+                                id="basic-menu"
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleClose}
+                                
+                                MenuListProps={{
+                                'aria-labelledby': 'basic-button',
+                                }}
+                            >
+                            <Link to={`/employee/profile/edit/${employeeId}`}>
+                              <MenuItem className='w-72 h-10 text-center' onClick={()=>RedirectToEditUser()}>Edit Profile</MenuItem>
+                            </Link>
+                                <MenuItem className='w-72 h-10 text-center' onClick={handleClose}>Terminate/Resign</MenuItem>
+                                <MenuItem className='w-72 h-10 text-center' onClick={deleteEmployeeByID}><span className='text-red-600'>Delete Employee Profile</span></MenuItem>
+                            </Menu>
+                           
+                    </div>
+                 </div>
+           </div>
                 
         }
-    </>
+        </>
        
 
   )

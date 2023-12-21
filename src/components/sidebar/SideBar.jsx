@@ -60,10 +60,7 @@ function SideBar() {
                     <IoPeople color='white' size={30} />
                     <li className='tracking-wider'  >Employee List</li>
                 </div>
-                <div className='navitem flex flex-row items-center gap-8' >
-                    <SiAwsorganizations color='white' size={30}  />
-                    <li className='tracking-wider'>Organiztion Chart</li>
-                </div>
+             
                 <div className='navitem flex flex-row items-center gap-8' >
                      <SlCalender color='white' size={30} />
                     <li className='tracking-wider'>Leave</li>

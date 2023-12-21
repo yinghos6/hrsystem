@@ -3,6 +3,10 @@ import './Register.scss';
 import { SiAlchemy } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
 import UserService from '../../service/UserService';
+import { Alert, Button } from 'antd';
+
+
+
 
 
 
@@ -81,16 +85,22 @@ function Register() {
 
                                 {status?
                                         <div>
-                                            <div className=' flex justify-center mt-12'>
+                                            <div className=' flex justify-center mt-12 '>
+                                                    <Alert
+                                                    message="Success Tips"
+                                                    description="Detailed description and advice about successful copywriting."
+                                                    type="success"
+                                                    showIcon
+                                                />
 
-                                                <span className='ml-5'>The user is created successfully!</span>
                                             </div>
                                             <div  className='flex justify-center mt-12'>
-                                                <button className='bg-sky-700 h-12 w-96 cursor-pointer hover:bg-sky-800 rounded-md' onClick={redirectToLogin} >
-                                                    <span className='tracking-wider  font-kdam text-white' >
+                                                <Button className='h-12 w-96 rounded-md' onClick={redirectToLogin}>
+                                                    <span >
                                                         Back to login page
                                                     </span>
-                                                </button>
+                                                </Button>
+                                               
                                             </div>
                                         </div>
                                         :

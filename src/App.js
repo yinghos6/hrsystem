@@ -5,6 +5,8 @@ import Register from './page/Register/Register';
 import Login from './page/Login/Login';
 import CreateNewEmployee from './page/CreateNewEmployee/CreateNewEmployee';
 import PersonalProfile from './page/PersonalProfile/PersonalProfile';
+import PersonalProfileEdit from './page/PersonalProfileEdit/PersonalProfileEdit';
+
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/createNewEmployee' element={<CreateNewEmployee />} />
           <Route path='/employee/profile/:id' element={<PersonalProfile />} />
+          <Route path='/employee/profile/edit/:id' element={<PersonalProfileEdit />} />
+
 
 
 

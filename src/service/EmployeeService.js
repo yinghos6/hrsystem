@@ -32,6 +32,10 @@ class EmployeeService{
         return axios.delete(EmployeeService_API_BASE_URL+'delete/'+ EmployeeID,{headers:authHeader()})
     }
 
+    editEmployeeProfile(editedEmployeeProfile){
+        return axios.put(EmployeeService_API_BASE_URL+"editProfile",editedEmployeeProfile,{headers:authHeader()})
+    }
+
 }
 
 
