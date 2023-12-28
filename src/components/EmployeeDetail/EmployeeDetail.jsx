@@ -102,6 +102,21 @@ function EmployeeDetail() {
                     <span >Back To Employee List Page</span>
                 </button>
             </div>
+            
+            <div className='flex flex-row justify-start font-kdam mx-48 gap-12'>
+                <Link to={`/employee/profile/${employeeId}`}>
+                    <button className='profile_item rounded-lg border border-2 px-8 py-8 border-sky-400 text-sky-500'>
+                        <span className='tracking-wider '>Personal Profile</span>
+                 </button>
+                </Link>
+                <Link to={`/employee/profile/${employeeId}/leave`}>
+                    <button className='profile_item rounded-lg border border-2 px-8 py-8 border-gray-300'>
+                        <span className='tracking-wider '>Leave</span>
+                    </button>
+                </Link>
+               
+            </div>
+           
             <div className='flex flex-col mt-8 border-2	p-12 register_box mx-48'>
                 <div className='flex flex-row items-center h-12 justify-center'>
                     

@@ -36,6 +36,12 @@ class EmployeeService{
         return axios.put(EmployeeService_API_BASE_URL+"editProfile",editedEmployeeProfile,{headers:authHeader()})
     }
 
+
+    getAllEmployeeByShopID(shopID,page, size,sortField, sortDir){
+        return axios.get(EmployeeService_API_BASE_URL+'getAllEmployeeByShop/'+ shopID + '?page='+page +'&size='+size +"&sortField="+sortField +"&sortDir="+sortDir,{headers:authHeader()})
+    }
+
+
 }
 
 

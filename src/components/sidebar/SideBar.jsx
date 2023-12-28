@@ -23,6 +23,8 @@ function SideBar() {
 
     const RedirectToCreateNewUser = () => navigation("/list")
 
+    const RedirectToLeaveList = () => navigation("/leave/list")
+
     const logout = () => {
         localStorage.removeItem("user");
         navigation('/login');
@@ -61,7 +63,7 @@ function SideBar() {
                     <li className='tracking-wider'  >Employee List</li>
                 </div>
              
-                <div className='navitem flex flex-row items-center gap-8' >
+                <div className='navitem flex flex-row items-center gap-8' onClick={()=>RedirectToLeaveList()} >
                      <SlCalender color='white' size={30} />
                     <li className='tracking-wider'>Leave</li>
                 </div>
@@ -71,7 +73,7 @@ function SideBar() {
                 </div>
                 <div className='navitem flex flex-row items-center gap-8' >
                      <BsListNested color='white' size={30}  />
-                    <li className='tracking-wider'>Roster</li>
+                    <li className='tracking-wider'>Report</li>
                 </div>
              </div>
             <div className='flex flex-col gap-1 mx-5 list-none mb-24'>

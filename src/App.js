@@ -6,6 +6,8 @@ import Login from './page/Login/Login';
 import CreateNewEmployee from './page/CreateNewEmployee/CreateNewEmployee';
 import PersonalProfile from './page/PersonalProfile/PersonalProfile';
 import PersonalProfileEdit from './page/PersonalProfileEdit/PersonalProfileEdit';
+import PersonalProfileLeave from './page/PersonalProfileLeave/PersonalProfileLeave';
+import EmployeeLeaveListPage from './page/EmployeeLeaveListPage/EmployeeLeaveListPage';
 
 
 function App() {
@@ -18,9 +20,12 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/createNewEmployee' element={<CreateNewEmployee />} />
           <Route path='/employee/profile/:id' element={<PersonalProfile />} />
+          <Route path='/employee/profile/:id/leave' element={<PersonalProfileLeave />} />
           <Route path='/employee/profile/edit/:id' element={<PersonalProfileEdit />} />
+          <Route path='/leave/list' element={< EmployeeLeaveListPage/>} />
 
 
+      
 
 
        </Routes>
