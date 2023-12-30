@@ -15,6 +15,7 @@ function EmployeeLeaveDetail() {
     const navigation = useNavigate();
 
     const RedirectToCreateNewUser = () => navigation("/list")
+    const GoBackToPreviousPage = ()=> navigation(-1)
 
     const [status, setstatus] = useState(false);
     const [employeeId, setemployeeId] = useState("");
@@ -50,10 +51,10 @@ function EmployeeLeaveDetail() {
     <div>
         <div className='flex flex-row justify-between'>
             <h4 className='text-lg font-bold page_title tracking-wider underline py-4'  >Employee Leave Management</h4>
-            <button className='back_button rounded-xl ' onClick={(e)=> {
-                RedirectToCreateNewUser(e)
+            <button className='back_button rounded-xl px-2 ' onClick={()=> {
+                GoBackToPreviousPage()
             }}>
-                <span >Back To Employee List Page</span>
+                <span >Back To Shop Employee List Page</span>
             </button>
         </div>
         <div className='flex flex-row justify-start font-kdam mx-48 gap-12'>
@@ -88,7 +89,7 @@ function EmployeeLeaveDetail() {
                 <span className='tracking-wider'>2020</span>
             </button>
          </div>
-         <div className='flex  h-12  mt-12 ml-24 item-center justify-start align-cneter gap-8'>
+         <div className='flex  h-12  mt-6 ml-24 item-center justify-start align-cneter gap-8'>
                 <span className='font-kdam '>Leave Year:</span>
                 <span className=''>{leaveRecord.leaveBalanceYear}</span>
         </div>
@@ -97,43 +98,43 @@ function EmployeeLeaveDetail() {
             <div className='flex flex-row w-full'>
 
                 <div className='basis-1/3'>
-                    <div className='flex flex-row h-12 items-center mt-12 ml-12 '>
+                    <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Annual Leave Total:</span>
                         <span className='basis-1/2'>{leaveRecord.balanceAnnualLeave}</span>
                     </div>
-                    <div className='flex flex-row h-12 items-center mt-12 ml-12 '>
+                    <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Sick Leave Total:</span>
                         <span className='basis-1/2'>{leaveRecord.balanceSickLeave}</span>
                     </div>
-                    <div className='flex flex-row h-12 items-center mt-12 ml-12 '>
+                    <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Special Leave Total:</span>
                         <span className='basis-1/2'>{leaveRecord.balanceSpecialLeave}</span>
                     </div>
                 </div>
-                <div className='basis-1/3'>
-                    <div className='flex flex-row h-12 items-center mt-12 ml-12 '>
+                <div className='basis-1/3 '>
+                    <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Annual Leave Counted:</span>
                         <span className='basis-1/2'>{leaveRecord.appliedAnnualLeave}</span>
                     </div>
-                    <div className='flex flex-row h-12 items-center mt-12 ml-12 '>
+                    <div className='flex flex-row h-12 items-cente mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Sick Leave Counted:</span>
                         <span className='basis-1/2'>{leaveRecord.appliedSickLeave}</span>
                     </div>
-                    <div className='flex flex-row h-12 items-center mt-12 ml-12 '>
+                    <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Special Leave Counted:</span>
                         <span className='basis-1/2'>{leaveRecord.appliedSpecialLeave}</span>
                     </div>
                 </div>
-                <div className='basis-1/3'>
-                    <div className='flex flex-row h-12 items-center mt-12 ml-12 '>
+                <div className='basis-1/3 '>
+                    <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Annual Leave Balance:</span>
                         <span className='basis-1/2'>{leaveRecord.balanceAnnualLeave - leaveRecord.appliedAnnualLeave}</span>
                     </div>
-                    <div className='flex flex-row h-12 items-center mt-12 ml-12 '>
+                    <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Sick Leave Balance:</span>
                         <span className='basis-1/2'>{leaveRecord.balanceSickLeave - leaveRecord.appliedSickLeave }</span>
                     </div>
-                    <div className='flex flex-row h-12 items-center mt-12 ml-12 '>
+                    <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Special Leave Balance:</span>
                         <span className='basis-1/2'>{leaveRecord.balanceSpecialLeave - leaveRecord.appliedSpecialLeave}</span>
                     </div>
@@ -157,9 +158,71 @@ function EmployeeLeaveDetail() {
                  <span>Delete</span>
              </button>
              </div> */}
-             <div className='flex flex-row h-12 items-center mt-24 justify-center'>
-                   
+             <div className='flex flex-row h-12 items-center mt-12 justify-between ml-12 align-center'>
+                   <p className='font-bold' >Leave Record</p>
+                   <Link to={`/employee/leave/${employeeId}/newRecord`}>
+                        <button className='ml-12 bg-sky-700 hover:bg-sky-600 text-white font-openSans w-48 rounded-lg h-10'>
+                                <span>Apply new leave</span>
+                        </button>
+                    </Link>
              </div>
+             <table className='ml-12 table-auto border-collapse bg-white mt-4'>
+                <thead>
+                    <tr >
+                        <th className='bg-state-100 '>
+                            <span className='color-state-400'>Leave Type</span>
+                        </th>
+                        <th className='bg-state-100'>
+                            <span>Leave Year</span>
+                        </th>
+                        <th className='bg-state-100'>
+                            <span>Leave Period</span>
+                        </th>  
+                        <th className='bg-state-100'>
+                             <span>Counted Days</span>
+                         </th>  
+                        <th className='bg-state-100'>
+                             <span>Leave Status</span>
+                         </th>  
+                    </tr>
+                </thead>
+                <tbody className='text-center'>
+                    <tr >
+                        <td >
+                            <span>Annual Leave</span>
+                        </td>
+                        <td >
+                            <span>2023</span>
+                        </td>
+                        <td>
+                            <span className='tracking-wider'>1/12/2023 - 3/12/2023</span>
+                       </td>
+                       <td>
+                            <span>3</span>
+                        </td>
+                       <td>
+                            <span>Approved</span>
+                        </td>
+                    </tr>
+                    <tr >
+                        <td >
+                            <span>Annual Leave</span>
+                        </td>
+                        <td >
+                            <span>2023</span>
+                        </td>
+                        <td>
+                            <span className='tracking-wider'>1/12/2023 - 3/12/2023</span>
+                        </td>
+                        <td>
+                            <span>3</span>
+                        </td>
+                        <td>
+                            <span>Approved</span>
+                        </td>
+                    </tr>
+                </tbody>
+             </table>
           </div>
     </div>
   )

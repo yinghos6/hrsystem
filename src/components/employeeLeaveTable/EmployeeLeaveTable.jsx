@@ -121,7 +121,7 @@ function EmployeeList() {
 
     useEffect(() => {
         GetDropdwonList();
-
+        getEmployeeListByDefault();
         getEmployeeListByShopID();
     }, [])
 
@@ -141,7 +141,7 @@ function EmployeeList() {
 
         </div>
        
-        <table className='mt-8 table-fixed border-collapse border border-slate-500 border-spacing-1 employee_table text-center '>
+        <table className='mt-8 table-auto border-collapse border border-slate-500 border-spacing-1 employee_table text-center '>
             <thead>
                 <tr>
                      <th className='border border-slate-500'>
@@ -170,62 +170,66 @@ function EmployeeList() {
             <tbody className=''>
                
 
+            {   
 
-
-                {   
-
-                    employeeList.map(
-                        (employee,index)=>
-                        <tr  className={employee.active_Status?'table_record green_text':'table_record red_text'}  key={index} >
-                            <td >
-                                {employee.active_Status?<span className='green_dot' />:<span className='red_dot' />}</td>
-                            <td className='font-openSans items-center'>{employee.staff_number +  " - " + employee.english_Surname + " " +employee.english_Given_Name}</td>
-                         
-              
-                            <td className='font-openSans'>{employee.shop.name}</td>
-                            <td className='font-openSans'>
-                                <Link to={`/employee/profile/${employee.id}/leave`}>
-                                    <button className='bg-sky-800 h-8 my-2 w-48 rounded-lg'>
-                                        <span className=' text-white '>Leave Details</span>
-                                    </button>
-                                </Link>
-                            </td>
+                employeeList.map(
+                    (employee,index)=>
+                    <tr  className={employee.active_Status?'table_record green_text':'table_record red_text'}  key={index} >
+                        <td >
+                            {employee.active_Status?<span className='green_dot' />:<span className='red_dot' />}</td>
+                        <td className='font-openSans items-center'>{employee.staff_number +  " - " + employee.english_Surname + " " +employee.english_Given_Name}</td>
+                     
+          
+                        <td className='font-openSans w-48'>{employee.shop.name}</td>
+                        <td className='font-openSans'>
+                            <Link to={`/employee/profile/${employee.id}/leave`}>
+                                <button className='bg-sky-800 h-8 my-2 w-48 rounded-lg'>
+                                    <span className=' text-white '>Leave Details</span>
+                                </button>
+                            </Link>
+                            <Link to={`/employee/leave/${employee.id}/newRecord`}>
+                                <button className='bg-teal-700 h-8 my-2 w-48 rounded-lg ml-12'>
+                                    <span className=' text-white '>Apply New Leave</span>
+                                </button>
+                            </Link>
                           
-                        </tr>
+                        </td>
+                      
+                    </tr>
 
-                    )
-                    
-                    // <tr className='table_record'>
-                    //     <td>T100012</td>
-                    //     <td>中文字</td>
-                    //     <td>Chan</td>
-                    //     <td>Tai Man</td>
-                    //     <td>HR/Admin</td>
-                    //     <td>HR Assistant</td>
-                    //     <td>Office</td>
-                    //     <td>View</td>
-                    // </tr>
-  
-                    
-                    // playerList.map(
-                    //     (player) => 
-                    //     <tr className='table_record' key={player.id}>
-                    //         <td>{player.fullName}</td>
-                    //         <td>{player.squadNumber}</td>
-                    //         <td>{player.age}</td>
-                    //         <td>GK</td>
-                    //         <td>Germany</td>
-                    //         <td>
-                    //             <Link to={`/profile/${player.id}`} >
-                    //                 <button type='button' className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300
-                    //                 font-medium rounded-full text-base h-8 w-20 focus:outline-none focus:border-none
-                    //                 '   
-                    //                  >View</button>
-                    //             </Link>
-                    //         </td>
-                    //     </tr>
-                    // )
-                }
+                )
+                
+                // <tr className='table_record'>
+                //     <td>T100012</td>
+                //     <td>中文字</td>
+                //     <td>Chan</td>
+                //     <td>Tai Man</td>
+                //     <td>HR/Admin</td>
+                //     <td>HR Assistant</td>
+                //     <td>Office</td>
+                //     <td>View</td>
+                // </tr>
+
+                
+                // playerList.map(
+                //     (player) => 
+                //     <tr className='table_record' key={player.id}>
+                //         <td>{player.fullName}</td>
+                //         <td>{player.squadNumber}</td>
+                //         <td>{player.age}</td>
+                //         <td>GK</td>
+                //         <td>Germany</td>
+                //         <td>
+                //             <Link to={`/profile/${player.id}`} >
+                //                 <button type='button' className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300
+                //                 font-medium rounded-full text-base h-8 w-20 focus:outline-none focus:border-none
+                //                 '   
+                //                  >View</button>
+                //             </Link>
+                //         </td>
+                //     </tr>
+                // )
+            }
 
                
                     
