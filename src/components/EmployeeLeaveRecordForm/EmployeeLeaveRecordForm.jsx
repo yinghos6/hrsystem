@@ -4,12 +4,10 @@ import { useState, useEffect } from 'react';
 import LeaveService from '../../service/LeaveService';
 import EmployeeService from '../../service/EmployeeService';
 import dayjs from 'dayjs';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
-import moment from 'moment';
-
+import { Button, Result } from 'antd';
 
 
 
@@ -30,6 +28,9 @@ function EmployeeLeaveRecordForm() {
     
     
 
+    const [status, setstatus] = useState(false);
+    const [successStatus, setsuccessStatus] = useState("");
+    const [successMessage, setsuccessMessage] = useState("");
 
     const{id} = useParams();
     const [employeeId, setemployeeId] = useState("");
@@ -40,9 +41,9 @@ function EmployeeLeaveRecordForm() {
     const [departmentName, setdepartmentName] = useState("");
     const [positionName, setpositionName] = useState("");
     const [shopName, setshopName] = useState("");
-    const [leaveTypeID, setleaveTypeID] = useState("");
+    const [leaveTypeID, setleaveTypeID] = useState("1");
     const [leaveTypeDropdown, setleaveTypeDropdown] = useState([]);
-    const [leaveStatusID, setleaveStatusID] = useState("");
+    const [leaveStatusID, setleaveStatusID] = useState("1");
     const [leaveStatusDropdown, setleaveStatusDropdown] = useState([]);
 
 
@@ -50,9 +51,10 @@ function EmployeeLeaveRecordForm() {
     const LeaveRecord = {
         "employeID": employeeId,
         "leaveTypeID":leaveTypeID,
+        "leaveStatusID":leaveStatusID,
         "leaveYear":"2023",
-        "leaveStartDate":dayjs(leavePeriod[0]).format('DD/MM/YYYY'),
-        "leaveEndDate": dayjs(leavePeriod[1]).format('DD/MM/YYYY'),
+        "leaveStartDate":dayjs(leavePeriod[0]).format('YYYY-MM-DD'),
+        "leaveEndDate": dayjs(leavePeriod[1]).format('YYYY-MM-DD'),
         "leave_counted_days":"3"
     }
     
@@ -87,6 +89,9 @@ function EmployeeLeaveRecordForm() {
 
     const submitNewLeaveRecord = ()=>{
         LeaveService.createNewLeaveRecord(id,LeaveRecord).then((res)=>{
+            setstatus(true);
+            setsuccessStatus(res.data.status);
+            setsuccessMessage(res.data.message);
             console.log(res.data);
         }).catch(error=>{
             console.log(error);
@@ -119,10 +124,25 @@ function EmployeeLeaveRecordForm() {
 
     const navigation = useNavigate();
     const GoBackToPreviousPage = ()=> navigation(-1);
+    const GoBackToLeaveListPage = () => navigation("/leave/list");
 
 
 
   return (
+    <>
+    {status?
+            <div className='w-full'>
+            <Result
+            status="success"
+            title={successStatus}
+            subTitle={successMessage}
+            extra={[
+              <Button key="button"  onClick={(e)=> {
+                GoBackToLeaveListPage(e)
+            }} >Back to Employee List Page</Button>,
+            ]}
+          />
+            </div>:
     <div>
         <div className='flex justify-center ml-24 '>
             <span className='font-kdam'>Create Employee New Leave Record</span>
@@ -223,7 +243,8 @@ function EmployeeLeaveRecordForm() {
          </div>
     
     
-    </div>
+    </div>}
+    </>
   )
 }
 

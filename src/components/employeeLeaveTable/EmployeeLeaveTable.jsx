@@ -23,7 +23,7 @@ function EmployeeList() {
     const [totalNum, settotalNum] = useState("");
     const [totalPage, settotalPage] = useState("");
     const [currentPage, setcurrentPage] = useState("0");
-    const [currentSize, setcurrentSize] = useState(20);
+    const [currentSize, setcurrentSize] = useState(10);
     const [sortField, setsortField] = useState("id");
     const [sortDir, setsortDir] = useState("asc");
     const [shopID, setshopID] = useState("1");
@@ -121,7 +121,6 @@ function EmployeeList() {
 
     useEffect(() => {
         GetDropdwonList();
-        getEmployeeListByDefault();
         getEmployeeListByShopID();
     }, [])
 

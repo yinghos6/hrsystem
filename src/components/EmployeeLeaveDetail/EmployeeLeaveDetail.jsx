@@ -8,6 +8,16 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from "react-router-dom";
 import LeaveService from '../../service/LeaveService';
+import Pagination from '@material-ui/lab/Pagination';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        marginTop: theme.spacing(1),
+      },
+    },
+  }));
 
 function EmployeeLeaveDetail() {
     const{id} = useParams();
@@ -19,17 +29,49 @@ function EmployeeLeaveDetail() {
 
     const [status, setstatus] = useState(false);
     const [employeeId, setemployeeId] = useState("");
+    const [leaveBalance, setleaveBalance] = useState([]);
     const [leaveRecord, setleaveRecord] = useState([]);
 
+    const [totalNum, settotalNum] = useState("");
+    const [totalPage, settotalPage] = useState("");
+    const [currentPage, setcurrentPage] = useState("0");
+    const [currentSize, setcurrentSize] = useState(10);
+    const [sortField, setsortField] = useState("id");
+    const [sortDir, setsortDir] = useState("asc");
 
-    const getAllLeaveRecord = ()=>{
-        LeaveService.getEmployeeLeaveRecord(id).then((res)=>{
-            setleaveRecord(res.data[0]);
-            console.log(leaveRecord)
+
+    const getAllLeaveBalance = ()=>{
+        LeaveService.getEmployeeLeaveBalance(id).then((res)=>{
+            setleaveBalance(res.data[0]);
 
         }).catch(error=>{
             console.log(error);
         })
+    }
+
+    const getAllLeaveRecord = ()=>{
+        LeaveService.getAllLeaveRecordByEmployee(id,currentPage,currentSize,sortField,sortDir).then((res)=>{
+            console.log(res.data)
+            setleaveRecord(res.data.content);
+            settotalNum(res.data.totalElements);
+            settotalPage(res.data.totalPages);
+
+        }).catch(error=>{
+            console.log(error);
+        })
+    }
+
+    const handlePageChange = (event,page)=>{
+        let seletedPage = page -1;
+        console.log("the page is"+ seletedPage);
+        setcurrentPage(seletedPage);
+        LeaveService.getAllLeaveRecordByEmployee(id,seletedPage,currentSize,sortField,sortDir).then((res)=>{
+            console.log(res.data)
+            setleaveRecord(res.data.content);
+        }).catch(error=>{
+            console.log(error);
+        })
+
     }
 
    
@@ -42,8 +84,8 @@ function EmployeeLeaveDetail() {
             console.log(error);
         })
 
-        getAllLeaveRecord()
-
+        getAllLeaveBalance();
+        getAllLeaveRecord();
   
     }, []);
 
@@ -91,7 +133,7 @@ function EmployeeLeaveDetail() {
          </div>
          <div className='flex  h-12  mt-6 ml-24 item-center justify-start align-cneter gap-8'>
                 <span className='font-kdam '>Leave Year:</span>
-                <span className=''>{leaveRecord.leaveBalanceYear}</span>
+                <span className=''>{leaveBalance.leaveBalanceYear}</span>
         </div>
          <div className='flex flex-column ml-12 '>
             
@@ -100,43 +142,43 @@ function EmployeeLeaveDetail() {
                 <div className='basis-1/3'>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Annual Leave Total:</span>
-                        <span className='basis-1/2'>{leaveRecord.balanceAnnualLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceAnnualLeave}</span>
                     </div>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Sick Leave Total:</span>
-                        <span className='basis-1/2'>{leaveRecord.balanceSickLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceSickLeave}</span>
                     </div>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Special Leave Total:</span>
-                        <span className='basis-1/2'>{leaveRecord.balanceSpecialLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceSpecialLeave}</span>
                     </div>
                 </div>
                 <div className='basis-1/3 '>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Annual Leave Counted:</span>
-                        <span className='basis-1/2'>{leaveRecord.appliedAnnualLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.appliedAnnualLeave}</span>
                     </div>
                     <div className='flex flex-row h-12 items-cente mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Sick Leave Counted:</span>
-                        <span className='basis-1/2'>{leaveRecord.appliedSickLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.appliedSickLeave}</span>
                     </div>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Special Leave Counted:</span>
-                        <span className='basis-1/2'>{leaveRecord.appliedSpecialLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.appliedSpecialLeave}</span>
                     </div>
                 </div>
                 <div className='basis-1/3 '>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Annual Leave Balance:</span>
-                        <span className='basis-1/2'>{leaveRecord.balanceAnnualLeave - leaveRecord.appliedAnnualLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceAnnualLeave - leaveBalance.appliedAnnualLeave}</span>
                     </div>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Sick Leave Balance:</span>
-                        <span className='basis-1/2'>{leaveRecord.balanceSickLeave - leaveRecord.appliedSickLeave }</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceSickLeave - leaveBalance.appliedSickLeave }</span>
                     </div>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Special Leave Balance:</span>
-                        <span className='basis-1/2'>{leaveRecord.balanceSpecialLeave - leaveRecord.appliedSpecialLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceSpecialLeave - leaveBalance.appliedSpecialLeave}</span>
                     </div>
            
                 </div>
@@ -187,42 +229,39 @@ function EmployeeLeaveDetail() {
                     </tr>
                 </thead>
                 <tbody className='text-center'>
-                    <tr >
-                        <td >
-                            <span>Annual Leave</span>
-                        </td>
-                        <td >
-                            <span>2023</span>
-                        </td>
-                        <td>
-                            <span className='tracking-wider'>1/12/2023 - 3/12/2023</span>
-                       </td>
-                       <td>
-                            <span>3</span>
-                        </td>
-                       <td>
-                            <span>Approved</span>
-                        </td>
-                    </tr>
-                    <tr >
-                        <td >
-                            <span>Annual Leave</span>
-                        </td>
-                        <td >
-                            <span>2023</span>
-                        </td>
-                        <td>
-                            <span className='tracking-wider'>1/12/2023 - 3/12/2023</span>
-                        </td>
-                        <td>
-                            <span>3</span>
-                        </td>
-                        <td>
-                            <span>Approved</span>
-                        </td>
-                    </tr>
+                    {leaveRecord.map(
+                        (record, index)=>
+
+                        <tr key={index}  >
+                            <td >
+                                <span>{record.leaveType.leaveName}</span>
+                            </td>
+                            <td >
+                                <span>{record.leaveYear}</span>
+                            </td>
+                            <td>
+                                <span className='tracking-wider'>{record.leaveStartDate.substring(0, 10)} - {record.leaveEndDate.substring(0, 10)} </span>
+                             </td>
+                            <td>
+                                <span>{record.countedDays}</span>
+                            </td>
+                             <td>
+                                <span>{record.leaveStatus.name}</span>
+                            </td>
+                        </tr>
+
+                    )}
+                   
                 </tbody>
              </table>
+             <div className='flex flex-row justify-center mt-8 '>
+             <span className='flex font-openSans '>The total of leave record: <p className='text-sky-800 ml-4 underline'>{totalNum}</p></span>
+            </div>
+            <div className='flex flex-row justify-center mt-4 item-center mb-12 '>
+                    <div className={useStyles.root}>
+                        <Pagination count={totalPage} variant="outlined" size="large" onChange={handlePageChange}  />
+                    </div>
+            </div>
           </div>
     </div>
   )
