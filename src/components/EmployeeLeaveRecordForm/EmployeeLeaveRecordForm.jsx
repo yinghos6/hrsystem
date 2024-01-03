@@ -34,7 +34,7 @@ function EmployeeLeaveRecordForm() {
 
     const{id} = useParams();
     const [employeeId, setemployeeId] = useState("");
-    const [leaveRecord, setleaveRecord] = useState([]);
+    const [leaveBalance, setleaveBalance] = useState([]);
     const [staffNumber, setstaffNumber] = useState("");
     const [engSurname, setengSurname] = useState("");
     const [engLastname, setengLastname] = useState("");
@@ -45,6 +45,7 @@ function EmployeeLeaveRecordForm() {
     const [leaveTypeDropdown, setleaveTypeDropdown] = useState([]);
     const [leaveStatusID, setleaveStatusID] = useState("1");
     const [leaveStatusDropdown, setleaveStatusDropdown] = useState([]);
+    const [countedDays, setcountedDays] = useState("");
 
 
 
@@ -55,14 +56,14 @@ function EmployeeLeaveRecordForm() {
         "leaveYear":"2023",
         "leaveStartDate":dayjs(leavePeriod[0]).format('YYYY-MM-DD'),
         "leaveEndDate": dayjs(leavePeriod[1]).format('YYYY-MM-DD'),
-        "leave_counted_days":"3"
+        "leave_counted_days":countedDays
     }
     
 
-    const getAllLeaveRecord = ()=>{
-        LeaveService.getEmployeeLeaveRecord(id).then((res)=>{
-            setleaveRecord(res.data[0]);
-            console.log(leaveRecord)
+    const getAllLeaveBalance = ()=>{
+        LeaveService.getEmployeeLeaveBalance(id).then((res)=>{
+            setleaveBalance(res.data[0]);
+            console.log(leaveBalance)
 
         }).catch(error=>{
             console.log(error);
@@ -87,7 +88,21 @@ function EmployeeLeaveRecordForm() {
         })
     }
 
+    const countTheDifferentDay = () =>{
+        const diffDay = leavePeriod[1] - leavePeriod[0];
+        let countedDays = 0;
+        if (diffDay == 0){
+             countedDays = 1;
+        } else{
+             countedDays = diffDay/(86400000) +1
+        }
+        // const countedDays = (leavePeriod[1] - leavePeriod[0] )/(86400000) +1;
+        console.log(countedDays);
+        setcountedDays(countedDays);
+    }
+
     const submitNewLeaveRecord = ()=>{
+        countTheDifferentDay();
         LeaveService.createNewLeaveRecord(id,LeaveRecord).then((res)=>{
             setstatus(true);
             setsuccessStatus(res.data.status);
@@ -116,7 +131,7 @@ function EmployeeLeaveRecordForm() {
 
     useEffect(() => {
         getEmployeeInfo();
-        getAllLeaveRecord();
+        getAllLeaveBalance();
         getAllLeaveType();
         getAllLeaveStatus();
     }, [])
@@ -176,15 +191,15 @@ function EmployeeLeaveRecordForm() {
                 <div className='basis-1/2 '>
                     <div className='flex flex-row h-12 items-center mt-12 ml-12 '>
                         <span className='basis-1/2 font-kdam '>2023 Annual Leave Balance:</span>
-                        <span className='basis-1/2'>{leaveRecord.balanceAnnualLeave - leaveRecord.appliedAnnualLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceAnnualLeave}</span>
                     </div>
                     <div className='flex flex-row h-12 items-center mt-12 ml-12 '>
                         <span className='basis-1/2 font-kdam '>2023 Sick Leave Balance:</span>
-                        <span className='basis-1/2'>{leaveRecord.balanceSickLeave - leaveRecord.appliedSickLeave }</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceSickLeave}</span>
                     </div>
                     <div className='flex flex-row h-12 items-center mt-12 ml-12 '>
                         <span className='basis-1/2 font-kdam '>2023 Special Leave Balance:</span>
-                        <span className='basis-1/2'>{leaveRecord.balanceSpecialLeave - leaveRecord.appliedSpecialLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceSpecialLeave}</span>
                     </div>
                 </div>
             </div>

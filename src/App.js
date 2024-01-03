@@ -9,6 +9,7 @@ import PersonalProfileEdit from './page/PersonalProfileEdit/PersonalProfileEdit'
 import PersonalProfileLeave from './page/PersonalProfileLeave/PersonalProfileLeave';
 import EmployeeLeaveListPage from './page/EmployeeLeaveListPage/EmployeeLeaveListPage';
 import CreateNewLeaveRecord from './page/CreateNewLeaveRecord/CreateNewLeaveRecord';
+import DashboardPage from './page/DashboardPage/DashboardPage';
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
           <Route path='/employee/profile/edit/:id' element={<PersonalProfileEdit />} />
           <Route path='/leave/list' element={< EmployeeLeaveListPage/>} />
           <Route path='/employee/leave/:id/newRecord' element={<CreateNewLeaveRecord />} />
-
+          <Route path='/dashboard' element={<DashboardPage />} />
       
 
 

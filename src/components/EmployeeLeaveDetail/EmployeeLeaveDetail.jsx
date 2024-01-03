@@ -142,15 +142,15 @@ function EmployeeLeaveDetail() {
                 <div className='basis-1/3'>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Annual Leave Total:</span>
-                        <span className='basis-1/2'>{leaveBalance.balanceAnnualLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceAnnualLeave + leaveBalance.appliedAnnualLeave}</span>
                     </div>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Sick Leave Total:</span>
-                        <span className='basis-1/2'>{leaveBalance.balanceSickLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceSickLeave + leaveBalance.appliedSickLeave}</span>
                     </div>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Special Leave Total:</span>
-                        <span className='basis-1/2'>{leaveBalance.balanceSpecialLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceSpecialLeave + leaveBalance.appliedSpecialLeave}</span>
                     </div>
                 </div>
                 <div className='basis-1/3 '>
@@ -170,15 +170,15 @@ function EmployeeLeaveDetail() {
                 <div className='basis-1/3 '>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Annual Leave Balance:</span>
-                        <span className='basis-1/2'>{leaveBalance.balanceAnnualLeave - leaveBalance.appliedAnnualLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceAnnualLeave}</span>
                     </div>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Sick Leave Balance:</span>
-                        <span className='basis-1/2'>{leaveBalance.balanceSickLeave - leaveBalance.appliedSickLeave }</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceSickLeave}</span>
                     </div>
                     <div className='flex flex-row h-12 items-center mt-8 ml-12 '>
                         <span className='basis-1/2 font-kdam '>Special Leave Balance:</span>
-                        <span className='basis-1/2'>{leaveBalance.balanceSpecialLeave - leaveBalance.appliedSpecialLeave}</span>
+                        <span className='basis-1/2'>{leaveBalance.balanceSpecialLeave}</span>
                     </div>
            
                 </div>

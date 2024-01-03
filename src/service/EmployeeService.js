@@ -41,6 +41,9 @@ class EmployeeService{
         return axios.get(EmployeeService_API_BASE_URL+'getAllEmployeeByShop/'+ shopID + '?page='+page +'&size='+size +"&sortField="+sortField +"&sortDir="+sortDir,{headers:authHeader()})
     }
 
+    getAllEmployeeByActiveStatus(statusID){
+        return axios.get(EmployeeService_API_BASE_URL + 'total/' + statusID,{headers:authHeader()});
+    }
 
 }
 

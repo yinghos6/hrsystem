@@ -25,6 +25,8 @@ function SideBar() {
 
     const RedirectToLeaveList = () => navigation("/leave/list")
 
+    const RedirectToDashboard = () => navigation("/dashboard")
+
     const logout = () => {
         localStorage.removeItem("user");
         navigation('/login');
@@ -54,7 +56,7 @@ function SideBar() {
         </div>
         <div className='flex flex-col justify-between left_sidebar '>
             <div className='flex flex-col mx-5 mt-24 my-5 list-none font-source3 h-full'>
-                <div className='navitem flex flex-row items-center gap-8 '>
+                <div className='navitem flex flex-row items-center gap-8 ' onClick={()=>RedirectToDashboard()} >
                      <MdOutlineDashboard color='white' size={30} className="nav_icon" />
                     <li className='tracking-wider'>Dashboard</li>
                 </div>
