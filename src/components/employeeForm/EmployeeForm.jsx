@@ -153,28 +153,30 @@ function EmployeeForm() {
                <div className='flex flex-row h-12 items-center mt-12 ml-12'>
                   <span className='basis-1/2 font-kdam '>Position:</span>
                   <div className='basis-1/2'>
-                          <select onChange={(e)=>setshopId(e.target.value)} className="w-72 h-12 border border-gray-300 px-8 rounded-md" >
+                          <select onChange={(e)=>setpositionId(e.target.value)} className="w-72 h-12 border border-gray-300 px-8 rounded-md" >
                           {
-                              ShopDropdown.map((shop, index)=>
-                              <option key={index} value={shop.id} >
-                                  {shop.description}
-                              </option>
-                          )
-                          }
+                            PositionDropdown.map((position, index)=>
+                                <option key={index} value={position.id} >
+                                    {position.description}
+                                </option>
+                            )
+                        }
                       </select>
                   </div>
                </div>
                <div className='flex flex-row h-12 items-center mt-12 ml-12'>
                   <span className='basis-1/2 font-kdam '>Shop:</span>
                   <div className='basis-1/2'>
-                      <select onChange={(e)=>setpositionId(e.target.value)} className="w-72 h-12 border border-gray-300 px-8 rounded-md" >
-                          {
-                              PositionDropdown.map((position, index)=>
-                                  <option key={index} value={position.id} >
-                                      {position.description}
-                                  </option>
-                              )
-                          }
+                      <select onChange={(e)=>setshopId(e.target.value)} className="w-72 h-12 border border-gray-300 px-8 rounded-md" >
+                          
+                                    {
+                                        ShopDropdown.map((shop, index)=>
+                                        <option key={index} value={shop.id} >
+                                            {shop.description}
+                                        </option>
+                                    )
+                                    }
+                   
                       </select>
                   </div>
                </div>

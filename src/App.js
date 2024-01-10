@@ -10,6 +10,9 @@ import PersonalProfileLeave from './page/PersonalProfileLeave/PersonalProfileLea
 import EmployeeLeaveListPage from './page/EmployeeLeaveListPage/EmployeeLeaveListPage';
 import CreateNewLeaveRecord from './page/CreateNewLeaveRecord/CreateNewLeaveRecord';
 import DashboardPage from './page/DashboardPage/DashboardPage';
+import PayrollGroupPage from './page/PayrollGroupPage/PayrollGroupPage';
+import PayrollCalPage from './page/PayrollCalPage/PayrollCalPage';
+import PayrollDetailPage from './page/PayrollDetailPage/PayrollDetailPage';
 
 
 function App() {
@@ -27,9 +30,9 @@ function App() {
           <Route path='/leave/list' element={< EmployeeLeaveListPage/>} />
           <Route path='/employee/leave/:id/newRecord' element={<CreateNewLeaveRecord />} />
           <Route path='/dashboard' element={<DashboardPage />} />
-      
-
-
+          <Route path='/payroll' element={<PayrollGroupPage/>} />
+          <Route path='/payroll/cal/:id' element={<PayrollCalPage />} />
+          <Route path='/payroll/detail/:id' element={<PayrollDetailPage/>} />
        </Routes>
     </div>
   );

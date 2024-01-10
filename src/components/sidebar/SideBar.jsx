@@ -27,6 +27,8 @@ function SideBar() {
 
     const RedirectToDashboard = () => navigation("/dashboard")
 
+    const RedirectToPayroll = () => navigation("/payroll")
+
     const logout = () => {
         localStorage.removeItem("user");
         navigation('/login');
@@ -69,14 +71,11 @@ function SideBar() {
                      <SlCalender color='white' size={30} />
                     <li className='tracking-wider'>Leave</li>
                 </div>
-                <div className='navitem flex flex-row items-center gap-8' >
+                <div className='navitem flex flex-row items-center gap-8' onClick={()=>RedirectToPayroll()} >
                     <SiCashapp color='white' size={30}  />
                     <li className='tracking-wider'>Payroll</li>
                 </div>
-                <div className='navitem flex flex-row items-center gap-8' >
-                     <BsListNested color='white' size={30}  />
-                    <li className='tracking-wider'>Report</li>
-                </div>
+               
              </div>
             <div className='flex flex-col gap-1 mx-5 list-none mb-24'>
                 <div className='navitem flex flex-row items-center gap-8' onClick={logout} >
