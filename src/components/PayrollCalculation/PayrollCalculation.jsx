@@ -33,12 +33,12 @@ function PayrollCalculation() {
 
     const MPFcalculation = () => {
         
-        if((payrollDetail[0].basisSalary+payrollDetail[0].bonus)*0.05 >= 1500 ){
+        if(totalAmount*0.05 >= 1500 ){
             setMPFContrition(1500);
             const netPaymentAmount = totalAmount - MPFContrition;
             setnetPayment(netPaymentAmount);
         }else{
-            setMPFContrition((payrollDetail[0].basisSalary+payrollDetail[0].bonus)*0.05);
+            setMPFContrition(totalAmount*0.05);
             const netPaymentAmount = totalAmount - MPFContrition;
             setnetPayment(netPaymentAmount);
         }

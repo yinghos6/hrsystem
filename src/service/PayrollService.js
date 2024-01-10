@@ -10,6 +10,10 @@ class PayrollService{
     createPayrollNewRecord(EmployeeID, PayrollRecord){
         return axios.post(PayrollService_API_BASE_URL+ EmployeeID + "/create",PayrollRecord, {headers:authHeader()})
     }
+
+    getAllPayrollRecordByID(EmployeeID){
+        return axios.get(PayrollService_API_BASE_URL +EmployeeID + "/allPayrollRecord", {headers:authHeader()})
+    }
 }
 
 

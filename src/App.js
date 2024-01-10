@@ -13,6 +13,7 @@ import DashboardPage from './page/DashboardPage/DashboardPage';
 import PayrollGroupPage from './page/PayrollGroupPage/PayrollGroupPage';
 import PayrollCalPage from './page/PayrollCalPage/PayrollCalPage';
 import PayrollDetailPage from './page/PayrollDetailPage/PayrollDetailPage';
+import PersonalProfilePayroll from './page/PersonalProfilePayroll/PersonalProfilePayroll';
 
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
           <Route path='/createNewEmployee' element={<CreateNewEmployee />} />
           <Route path='/employee/profile/:id' element={<PersonalProfile />} />
           <Route path='/employee/profile/:id/leave' element={<PersonalProfileLeave />} />
+          <Route path='/employee/profile/:id/payroll' element={<PersonalProfilePayroll/>} />
+
           <Route path='/employee/profile/edit/:id' element={<PersonalProfileEdit />} />
           <Route path='/leave/list' element={< EmployeeLeaveListPage/>} />
           <Route path='/employee/leave/:id/newRecord' element={<CreateNewLeaveRecord />} />
@@ -33,6 +36,7 @@ function App() {
           <Route path='/payroll' element={<PayrollGroupPage/>} />
           <Route path='/payroll/cal/:id' element={<PayrollCalPage />} />
           <Route path='/payroll/detail/:id' element={<PayrollDetailPage/>} />
+          
        </Routes>
     </div>
   );

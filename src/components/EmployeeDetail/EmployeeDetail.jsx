@@ -114,7 +114,13 @@ function EmployeeDetail() {
                         <span className='tracking-wider '>Leave</span>
                     </button>
                 </Link>
-               
+                <Link to={`/employee/profile/${employeeId}/payroll`}>
+
+                <button className='profile_item rounded-lg border border-2 px-8 py-8 border-gray-300'>
+                        <span className='tracking-wider '>Payroll</span>
+                 </button>
+                 </Link>
+
             </div>
            
             <div className='flex flex-col mt-8 border-2	p-12 register_box mx-48'>
